@@ -32,9 +32,9 @@ Classes in the package org.fastfilter.xor:
 
 # Execution of the code
 Compile the java classes and resolve dependencies. Then:
-- Execute org.fastfilter.xor.tester.ComparingFilters to generate the log files that provide memory and FP information.
+- Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the comparingFilters.bat script and run it to generate the log files that provide memory and FP information.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the speedExecution.bat script and run it to get the speed comparison logs.
-- Execute org.fastfilter.xor.tester.ValidateBirkberk to get the results for the Birkberk words spell checker use case.
-- Execute org.fastfilter.xor.tester.ValidateURL to get the results for the URL deny list use case.
+- Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the BirkberkUseCaseTester.bat script and run it to get the results for the Bitcoin SPV use case.
+- Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the URLDenyListUseCaseTester.bat script and run it to get the results for the Bitcoin SPV use case.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the BitcoinSPVMemoryTester.bat script and run it to get the results for the Bitcoin SPV use case.
 - GlobalTesterLong in org.fastfilter.tester.xor just validates the correct behavior of the implemented approaches
