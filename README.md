@@ -1,7 +1,7 @@
 # Filters with a False Positive Free Set
 This repository includes the code in Java of the different filter implementations and use cases proposed in the paper:
 
-P. Reviriego, A. Sánchez-Macián, S. Walzer and P.C. Dillinger, "Approximate Membership Check Filters with a False Positive Free Set" Arxiv
+P. Reviriego, A. Sánchez-Macián, S. Walzer and P.C. Dillinger, "Approximate Membership Check Filters with a False Positive Free Set" Arxiv: http://arxiv.org/abs/2111.06856
 
 # Dependencies
 - Guava >=30.1.1
