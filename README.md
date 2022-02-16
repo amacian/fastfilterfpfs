@@ -28,12 +28,14 @@ Classes in the package org.fastfilter.xor:
 - XorSeveralFilters.java (implementation of the Two-Filter approach, actually N-filter, from the paper for longs) 
 - XorSeveralFiltersTByFile.java (same as XorSeveralFilters, but T is read from a Reader to cope with sets of big size)
 - XorSeveralStringFilters.java (same as XorSeveralFilters, but for Strings instead of longs - for the use cases)
+- XorStackedFilters.java (Stacked Xor filters to perform comparison with the proposed designs)
 
 
 # Execution of the code
 Compile the java classes and resolve dependencies. Then:
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the comparingFilters.bat script and run it to generate the log files that provide memory and FP information.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the speedExecution.bat script and run it to get the speed comparison logs.
+- Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the speedExecutionSF.bat script and run it to get the Stacked Filters speed logs.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the BirkberkUseCaseTester.bat script and run it to get the results for the Bitcoin SPV use case.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the URLDenyListUseCaseTester.bat script and run it to get the results for the Bitcoin SPV use case.
 - Modify GUAVA_DIR, FASTFILTER_DIR and CLASSPATH from the BitcoinSPVMemoryTester.bat script and run it to get the results for the Bitcoin SPV use case.
