@@ -8,4 +8,5 @@ set CLASSPATH=./bin;%GUAVA_DIR%;%FASTFILTER_DIR%
 REM  java -cp %CLASSPATH% org.fastfilter.xor.tester.ComparingFilters
 
 java -cp %CLASSPATH% org.fastfilter.xor.tester.ComparingFilters
+java -cp %CLASSPATH% org.fastfilter.xor.tester.ComparingStackedFilters
  

@@ -189,7 +189,7 @@ public class ComparingFilters {
 		}
 		try {
 			fw.close();
-			fw.close();
+			fw2.close();
 		}catch(Exception e) {
 			
 		}
@@ -201,7 +201,7 @@ public class ComparingFilters {
 	 * @param m
 	 * @return
 	 */
-	private static double mean(double[] m) {
+	static double mean(double[] m) {
 		double total = sum(m);
 		double result = Math.round(100000*total/m.length)/100000D;
 		return result;
@@ -227,7 +227,7 @@ public class ComparingFilters {
 	 * @param tSet T set free of false positives
 	 * @param oSet O set independent from the previous ones
 	 */
-	private static double checkFilter(Filter xi, Set<Long> sSet, Set<Long> tSet, Set<Long> oSet) {
+	static double checkFilter(Filter xi, Set<Long> sSet, Set<Long> tSet, Set<Long> oSet) {
 		//System.out.println("Actual size of the filter =" +xi.getBitCount());
 		
 		// Total number of true positives

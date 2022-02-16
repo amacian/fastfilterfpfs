@@ -14,6 +14,7 @@ import org.fastfilter.Filter;
 import org.fastfilter.xor.XorIntegratedFilter;
 import org.fastfilter.xor.XorSeveralFilters;
 import org.fastfilter.xor.XorSimpleN;
+import org.fastfilter.xor.XorStackedFilters;
 
 import com.google.common.collect.Sets;
 
@@ -24,8 +25,9 @@ public class IndividualSpeedTests {
 		types.add("OF");
 		types.add("TF");
 		types.add("IF1");
-		types.add("IF2");		
-		if (args.length!=4){
+		types.add("IF2");
+		types.add("SF");
+		if (args.length<4){
 			System.out.println("Incorrect number of arguments");
 			System.exit(1);
 		}
@@ -36,10 +38,11 @@ public class IndividualSpeedTests {
 		}
 		// Size of S
 		int sSize = 100000;
-		String header =	"Type;TSize;r-1;Creation;CheckPos;CheckNeg;A\n";
+		String header =	"Type;TSize;r-1;Creation;CheckPos;CheckNeg;A;Second\n";
 		// Size of T
 		int tSize = 10000;
 		int nBits = 3;
+		int otherBits = 1;
 		String filename = "speed_details.log";
 
 		boolean printHeader = !(new File(filename)).exists();
@@ -51,6 +54,11 @@ public class IndividualSpeedTests {
 			System.out.println("Error in the format of the arguments");
 			System.exit(1);
 		}
+		
+		if(args.length>4) {
+			otherBits = Integer.parseInt(args[4]);
+		}
+		
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(filename, true);
@@ -115,6 +123,11 @@ public class IndividualSpeedTests {
 			fil=XorIntegratedFilter.construct(sSet, tSet, nBits+a, f);
 			end = System.nanoTime();
 			selectedA = a;
+		}else if (type.equals("SF")) {
+			init = System.nanoTime();
+			fil=XorStackedFilters.construct(sSet, tSet, nBits+optimizedTFA, otherBits);
+			end = System.nanoTime();
+			selectedA = optimizedTFA;			
 		}
 		long timeCreate=end-init;
 
@@ -124,15 +137,15 @@ public class IndividualSpeedTests {
 		double[] times = IndividualSpeedTests.checkFilter(fil, l);
 		double timeCheckpositive = times[0];
 		double timeChecknegative = times[1];
-		/*double timeCheckpositive=IndividualSpeedTests.checkFilter(fil, sSet, false);
-		double timeChecknegative=IndividualSpeedTests.checkFilter(fil, oSet, true);*/
+
 
 		
 		try {
-			// Calculate the estimated number of elements that will be false positives for TF
+			
 			fw.write(type+";"+tSize+";"+nBits+";"+(timeCreate)+";"+
 					(timeCheckpositive)+";"+
-					(timeChecknegative)+";"+selectedA);
+					(timeChecknegative)+";"+
+					selectedA+";"+((type.equals("SF")?otherBits:0)));
 			fw.write("\n");
 			fw.flush();
 			fw.close();
@@ -141,25 +154,6 @@ public class IndividualSpeedTests {
 		}
 
 	}
-	
-	/*private static double checkFilter(Filter xi, Set<Long> set, boolean onlyNegatives) {
-		long init = 0;
-		long end = 0;
-		double acc = 0;
-		int total = 0;
-		for (long s: set ) {
-			init=System.nanoTime();
-			boolean res = xi.mayContain(s);
-			end=System.nanoTime();
-			if(!onlyNegatives || !res) {
-				acc += end-init;
-				total++;
-			}
-		}
-		System.out.println(acc+":"+total);
-		return acc/(double)total;
-		
-	}*/
 	
 	private static double[] checkFilter(Filter xi, Collection<Long> set) {
 		long init = 0;
